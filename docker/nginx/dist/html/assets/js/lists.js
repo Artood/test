@@ -68,4 +68,4 @@ const printSecondList = () => {
 };
 
 printFirstList();
-printSecondList();
+//printSecondList();

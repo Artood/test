@@ -16,10 +16,10 @@ const CONFIG = {
   twelveHourFormat: false,
 
   // Greetings
-  greetingMorning: 'Good morning ☕',
-  greetingAfternoon: 'Good afternoon 🍯',
-  greetingEvening: 'Good evening 😁',
-  greetingNight: 'Go to Sleep 🥱',
+  greetingMorning: 'Good morning',
+  greetingAfternoon: 'Good afternoon',
+  greetingEvening: 'Good evening',
+  greetingNight: 'Good night',
 
   // ┬  ┬┌─┐┌┬┐┌─┐
   // │  │└─┐ │ └─┐
@@ -36,7 +36,7 @@ const CONFIG = {
         name: 'Attack Map',
         link: '/map/',
       },
-      {
+  /*    {
         name: 'Cyberchef',
         link: '/cyberchef/',
       },
@@ -44,14 +44,16 @@ const CONFIG = {
         name: 'Elasticvue',
         link: '/elasticvue/',
       },
+  */
       {
         name: 'Kibana',
         link: '/kibana/',
       },
-      {
+  /*    {
         name: 'Spiderfoot',
         link: '/spiderfoot/',
       },
+  */
     ],
     secondList: [
       {

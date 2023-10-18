@@ -361,7 +361,7 @@ fuCHECKPACKAGES "$myPREINSTALLPACKAGES"
 # Check for Debian release and extract command line arguments
 myLSB=$(lsb_release -c | awk '{ print $2 }')
 myVERSIONS="$myLSB_STABLE_SUPPORTED $myLSB_TESTING_SUPPORTED"
-mySUPPORT="FALSE"
+mySUPPORT="TRUE"
 for i in $myVERSIONS
   do
     if [ "$myLSB" = "$i" ];

@@ -27,3 +27,4 @@ services:
     image: "dtagdevsec/elasticsearch:2204"
     volumes:
      - /data:/data
+     - ./dist/elasticsearch.yml:/etc/elasticsearch/elasticsearch.yml
