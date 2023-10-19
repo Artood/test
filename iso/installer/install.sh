@@ -443,7 +443,7 @@ if [ -s "$myTPOT_CONF_FILE" ] && [ "$myTPOT_CONF_FILE" != "" ];
 fi
 
 # Prepare running the installer
-myUSERCHECK=$(grep "tpot" /etc/passwd | wc -l)
+myUSERCHECK=$(grep "tpot:" /etc/passwd | wc -l)
 if [ "$myUSERCHECK" -gt "0" ];
   then
     echo "### The user name \"tpot\" already exists. The tpot username and group may not previously exist or T-Pot will not work."
@@ -709,7 +709,8 @@ if ! [ "$myTPOT_DEPLOYMENT_TYPE" == "iso" ];
   then
     fuBANNER "Cloning T-Pot"
     ### DEV
-    git clone https://github.com/telekom-security/tpotce /opt/tpot
+    #git clone https://github.com/telekom-security/tpotce /opt/tpot
+    git clone https://github.com/elskh/tpot.git /opt/tpot
 fi
 
 # Let's create the T-Pot user
