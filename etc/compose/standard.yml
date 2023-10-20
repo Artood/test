@@ -521,9 +521,6 @@ services:
      - bootstrap.memory_lock=true
      - ES_JAVA_OPTS=-Xms2048m -Xmx2048m
      - ES_TMPDIR=/tmp
-     - ELASTIC_USERNAME=elastic
-     - ELASTIC_PASSWORD=123qweASD
-     - xpack.security.enabled=true
     cap_add:
      - IPC_LOCK
     ulimits:
@@ -552,10 +549,8 @@ services:
     ports:
      - "127.0.0.1:64296:5601"
     image: "dtagdevsec/kibana:2204"
-    environment:
-     - ELASTIC_USERNAME=elastic
-     - ELASTIC_PASSWORD=123qweASD
-     - xpack.security.enabled=true
+    volumes:
+     - /opt/tpot/docker/elk/kibana/dist/kibana.yml:/etc/kibana/kibana.yml
 
 ## Logstash service
   logstash:
