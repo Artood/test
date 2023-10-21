@@ -24,9 +24,10 @@ services:
     mem_limit: 4g
     ports:
      - "127.0.0.1:64298:9200"
-    image: "dtagdevsec/elasticsearch:2204"
+#    image: "dtagdevsec/elasticsearch:2204"
     volumes:
      - /data:/data
+     - /opt/tpot/docker/elk/elasticsearch/dist/elasticsearch.yml:/etc/elasticsearch/elasticsearch.yml
 
 ## Kibana service
   kibana:
@@ -39,7 +40,9 @@ services:
         condition: service_healthy
     ports:
      - "127.0.0.1:64296:5601"
-    image: "dtagdevsec/kibana:2204"
+#    image: "dtagdevsec/kibana:2204"
+    volumes:
+     - /opt/tpot/docker/elk/kibana/dist/kibana.yml:/etc/kibana/kibana.yml
 
 ## Logstash service
   logstash:
@@ -53,7 +56,7 @@ services:
         condition: service_healthy
     env_file:
      - /opt/tpot/etc/compose/elk_environment
-    image: "dtagdevsec/logstash:2204"
+#    image: "dtagdevsec/logstash:2204"
     volumes:
      - /data:/data
 #     - /root/tpotce/docker/elk/logstash/dist/logstash.conf:/etc/logstash/conf.d/logstash.conf

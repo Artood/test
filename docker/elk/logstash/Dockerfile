@@ -27,7 +27,8 @@ RUN apt-get update -y && \
     aria2c -s16 -x 16 https://listbot.sicherheitstacho.eu/iprep.yaml.bz2 && \
     bunzip2 *.bz2 && \
     cd /root/dist/ && \
-    aria2c -s 16 -x 16 https://artifacts.elastic.co/downloads/logstash/logstash-$LS_VER-$LS_ARCH.deb && \
+#    aria2c -s 16 -x 16 https://artifacts.elastic.co/downloads/logstash/logstash-$LS_VER-$LS_ARCH.deb && \
+    aria2c -s 16 -x 16 https://mirror.yandex.ru/mirrors/elastic/8/pool/main/l/logstash/logstash-$LS_VER-amd64.deb && \
     dpkg -i logstash-$LS_VER-$LS_ARCH.deb && \
 #    /usr/share/logstash/bin/logstash-plugin install logstash-output-gelf logstash-output-syslog && \
 #

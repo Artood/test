@@ -17,7 +17,8 @@ RUN apt-get update -y && \
       if [ "$ARCH" = "aarch64" ]; then ES_ARCH="arm64"; fi && \
     echo "$ARCH" && \
     cd /root/dist/ && \
-    aria2c -s 16 -x 16 https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-$ES_VER-$ES_ARCH.deb && \
+#    aria2c -s 16 -x 16 https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-$ES_VER-$ES_ARCH.deb && \
+    aria2c -s 16 -x 16 https://mirror.yandex.ru/mirrors/elastic/8/pool/main/e/elasticsearch/elasticsearch-$ES_VER-amd64.deb && \
     dpkg -i elasticsearch-$ES_VER-$ES_ARCH.deb && \
 #
 # Add and move files
@@ -28,7 +29,8 @@ RUN apt-get update -y && \
 # Setup user, groups and configs
     groupmod -g 2000 elasticsearch && \
     usermod -u 2000 elasticsearch && \
-    chown -R root:elasticsearch /etc/default/elasticsearch \
+#    chown -R root:elasticsearch /etc/default/elasticsearch \
+    chown -R elasticsearch:elasticsearch /etc/default/elasticsearch \
                                 /etc/elasticsearch && \
     chown -R elasticsearch:elasticsearch /var/lib/elasticsearch \
                                          /var/log/elasticsearch && \

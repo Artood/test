@@ -16,7 +16,8 @@ RUN apt-get update -y && \
       if [ "$ARCH" = "aarch64" ]; then KB_ARCH="arm64"; fi && \
     echo "$ARCH" && \
     cd /root/dist/ && \
-    aria2c -s 16 -x 16 https://artifacts.elastic.co/downloads/kibana/kibana-$KB_VER-$KB_ARCH.deb && \
+#    aria2c -s 16 -x 16 https://artifacts.elastic.co/downloads/kibana/kibana-$KB_VER-$KB_ARCH.deb && \
+    aria2c -s 16 -x 16 https://mirror.yandex.ru/mirrors/elastic/8/pool/main/k/kibana/kibana-$KB_VER-amd64.deb && \
     dpkg -i kibana-$KB_VER-$KB_ARCH.deb && \
 #
 # Setup user, groups and configs
@@ -36,7 +37,8 @@ RUN apt-get update -y && \
     /usr/share/kibana/bin/kibana --optimize --allow-root && \
     groupmod -g 2000 kibana && \
     usermod -u 2000 kibana && \
-    chown -R root:kibana /etc/kibana && \
+#    chown -R root:kibana /etc/kibana && \
+    chown -R kibana:kibana /etc/kibana && \
     chown -R kibana:kibana /usr/share/kibana/data \
                            /run/kibana \
 			   /var/log/kibana \
