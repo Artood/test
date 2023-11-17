@@ -724,7 +724,7 @@ adduser --system --no-create-home --uid 2000 --disabled-password --disabled-logi
 #a=$(fuRANDOMWORD /opt/tpot/host/usr/share/dict/a.txt)
 #n=$(fuRANDOMWORD /opt/tpot/host/usr/share/dict/n.txt)
 #myHOST=$a$n
-myHOST="tpot"
+myHOST="tpot_hive"
 fuBANNER "Set hostname"
 hostnamectl set-hostname $myHOST
 sed -i 's#127.0.1.1.*#127.0.1.1\t'"$myHOST"'#g' /etc/hosts
@@ -883,15 +883,15 @@ sed -i 's#After=.*#After=systemd-tmpfiles-setup.service console-screen.service k
 fuBANNER "Setup prompt"
 tee -a /root/.bashrc <<EOF
 $mySHELLCHECK
-$myROOTPROMPT
-$myROOTCOLORS
+# $myROOTPROMPT
+# $myROOTCOLORS
 PATH="\$PATH:/opt/tpot/bin"
 EOF
 for i in $(ls -d /home/*/)
   do
 tee -a $i.bashrc <<EOF
 $mySHELLCHECK
-$myUSERPROMPT
+# $myUSERPROMPT
 PATH="\$PATH:/opt/tpot/bin"
 EOF
 done

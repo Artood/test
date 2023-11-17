@@ -41,8 +41,9 @@ RUN apt-get update -y && \
     chown -R kibana:kibana /etc/kibana && \
     chown -R kibana:kibana /usr/share/kibana/data \
                            /run/kibana \
-			   /var/log/kibana \
-		     	   /var/lib/kibana && \
+                           /usr/share/kibana/config \
+			            /var/log/kibana \
+		     	        /var/lib/kibana && \
     chmod 755 -R /usr/share/kibana/config && \
 #
 # Clean up
