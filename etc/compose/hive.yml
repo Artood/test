@@ -102,7 +102,7 @@ services:
      - /opt/tpot/etc/compose/elk_environment
     stop_signal: SIGKILL
     tty: true
-    image: "dtagdevsec/map:2204"
+    build: ../../docker/elk/map/
 #### /ELK
 
 # Nginx service
