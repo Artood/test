@@ -87,7 +87,7 @@ services:
     tty: true
     ports:
      - "127.0.0.1:64299:64299"
-    image: "dtagdevsec/map:2204"
+    build: ../docker/elk/map/
 
 ## Map Data Service
   map_data:
