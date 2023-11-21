@@ -127,6 +127,7 @@ services:
      - /data/nginx/cert/:/etc/nginx/cert/:ro
      - /data/nginx/conf/nginxpasswd:/etc/nginx/nginxpasswd:ro
      - /data/nginx/log/:/var/log/nginx/
+     - /opt/tpot/docker/nginx/dist/html:/var/lib/nginx/html
 
 # Spiderfoot service
   spiderfoot:
