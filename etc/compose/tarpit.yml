@@ -6,7 +6,7 @@ networks:
   endlessh_local:
   hellpot_local:
   heralding_local:
-  ewsposter_local:
+#  ewsposter_local:
   spiderfoot_local:
 
 services:
@@ -211,7 +211,7 @@ services:
     tty: true
     ports:
      - "127.0.0.1:64299:64299"
-    image: "dtagdevsec/map:2204"
+    build: /opt/tpot/docker/elk/map/
 
 ## Map Data Service
   map_data:
@@ -226,30 +226,30 @@ services:
      - /opt/tpot/etc/compose/elk_environment
     stop_signal: SIGKILL
     tty: true
-    image: "dtagdevsec/map:2204"
+    build: /opt/tpot/docker/elk/map/
 #### /ELK
 
-# Ewsposter service
-  ewsposter:
-    container_name: ewsposter
-    restart: always
-    networks:
-     - ewsposter_local
-    environment:
-     - EWS_HPFEEDS_ENABLE=false
-     - EWS_HPFEEDS_HOST=host
-     - EWS_HPFEEDS_PORT=port
-     - EWS_HPFEEDS_CHANNELS=channels
-     - EWS_HPFEEDS_IDENT=user
-     - EWS_HPFEEDS_SECRET=secret
-     - EWS_HPFEEDS_TLSCERT=false
-     - EWS_HPFEEDS_FORMAT=json
-    env_file:
-     - /opt/tpot/etc/compose/elk_environment
-    image: "dtagdevsec/ewsposter:2204"
-    volumes:
-     - /data:/data
-     - /data/ews/conf/ews.ip:/opt/ewsposter/ews.ip
+## Ewsposter service
+#  ewsposter:
+#    container_name: ewsposter
+#    restart: always
+#    networks:
+#     - ewsposter_local
+#    environment:
+#     - EWS_HPFEEDS_ENABLE=false
+#     - EWS_HPFEEDS_HOST=host
+#     - EWS_HPFEEDS_PORT=port
+#     - EWS_HPFEEDS_CHANNELS=channels
+#     - EWS_HPFEEDS_IDENT=user
+#     - EWS_HPFEEDS_SECRET=secret
+#     - EWS_HPFEEDS_TLSCERT=false
+#     - EWS_HPFEEDS_FORMAT=json
+#    env_file:
+#     - /opt/tpot/etc/compose/elk_environment
+#    image: "dtagdevsec/ewsposter:2204"
+#    volumes:
+#     - /data:/data
+#     - /data/ews/conf/ews.ip:/opt/ewsposter/ews.ip
 
 # Nginx service
   nginx:
@@ -273,6 +273,7 @@ services:
      - /data/nginx/cert/:/etc/nginx/cert/:ro
      - /data/nginx/conf/nginxpasswd:/etc/nginx/nginxpasswd:ro
      - /data/nginx/log/:/var/log/nginx/
+     - /opt/tpot/docker/nginx/dist/html:/var/lib/nginx/html
 
 # Spiderfoot service
   spiderfoot:

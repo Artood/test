@@ -45,22 +45,22 @@ export myBLACKHOLE_STATUS
 export mySSHUSER
 
 # Build issue
-echo "[H[2J" > /etc/issue
+# echo "[H[2J" > /etc/issue
 # toilet -f ivrit -F metal --filter border:metal "T-Pot   22.04" | sed 's/\\/\\\\/g' >> /etc/issue
-echo >> /etc/issue
-echo ",---- [ [1;34m\n[0m ] [ [0;34m\d[0m ] [ [1;30m\t[0m ]" >> /etc/issue
-echo "|" >> /etc/issue
-echo "| [1;34mIP: $myLOCALIP ($myEXTIP)[0m" >> /etc/issue
-echo "| [0;34mSSH: ssh -l tsec -p 64295 $myLOCALIP[0m" >> /etc/issue 
-if [ "$myCHECKIFSENSOR" == "0" ];
-  then
-    echo "| [1;30mWEB: https://$myLOCALIP:64297[0m" >> /etc/issue
-fi
-echo "| [0;37mADMIN: https://$myLOCALIP:64294[0m" >> /etc/issue
-echo "$myBLACKHOLE_STATUS" >> /etc/issue
-echo "|" >> /etc/issue
-echo "\`----" >> /etc/issue
-echo >> /etc/issue
+# echo >> /etc/issue
+# echo ",---- [ [1;34m\n[0m ] [ [0;34m\d[0m ] [ [1;30m\t[0m ]" >> /etc/issue
+# echo "|" >> /etc/issue
+# echo "| [1;34mIP: $myLOCALIP ($myEXTIP)[0m" >> /etc/issue
+# echo "| [0;34mSSH: ssh -l tsec -p 64295 $myLOCALIP[0m" >> /etc/issue 
+# if [ "$myCHECKIFSENSOR" == "0" ];
+#  then
+#    echo "| [1;30mWEB: https://$myLOCALIP:64297[0m" >> /etc/issue
+# fi
+# echo "| [0;37mADMIN: https://$myLOCALIP:64294[0m" >> /etc/issue
+# echo "$myBLACKHOLE_STATUS" >> /etc/issue
+# echo "|" >> /etc/issue
+# echo "\`----" >> /etc/issue
+# echo >> /etc/issue
 tee /data/ews/conf/ews.ip << EOF
 [MAIN]
 ip = $myEXTIP

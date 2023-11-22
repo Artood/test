@@ -724,10 +724,10 @@ adduser --system --no-create-home --uid 2000 --disabled-password --disabled-logi
 #a=$(fuRANDOMWORD /opt/tpot/host/usr/share/dict/a.txt)
 #n=$(fuRANDOMWORD /opt/tpot/host/usr/share/dict/n.txt)
 #myHOST=$a$n
-myHOST="tpot_hive"
-fuBANNER "Set hostname"
-hostnamectl set-hostname $myHOST
-sed -i 's#127.0.1.1.*#127.0.1.1\t'"$myHOST"'#g' /etc/hosts
+#myHOST="tpot_hive"
+#fuBANNER "Set hostname"
+#hostnamectl set-hostname $myHOST
+#sed -i 's#127.0.1.1.*#127.0.1.1\t'"$myHOST"'#g' /etc/hosts
 
 # Prevent cloud-init from overwriting our new hostname
 if [ -f '/etc/cloud/cloud.cfg' ]; then
