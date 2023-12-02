@@ -537,7 +537,8 @@ if [ "$myTPOT_DEPLOYMENT_TYPE" == "iso" ] || [ "$myTPOT_DEPLOYMENT_TYPE" == "use
   #  "LOG4J" "Log4Pot, ELK, NSM & Tools" \
   #  "MEDICAL" "Dicompot, Medpot, ELK, NSM & Tools" \
   #  "MINI" "Same as Standard with focus on qHoneypots" \
-  #  "SENSOR" "Just Honeypots & NSM" 3>&1 1>&2 2>&3 3>&-)
+  #  "SENSOR" "Just Honeypots & NSM" \ 
+      3>&1 1>&2 2>&3 3>&-)
 fi
 
 # Let's ask for a secure tsec password if installation type is iso
