@@ -532,13 +532,12 @@ if [ "$myTPOT_DEPLOYMENT_TYPE" == "iso" ] || [ "$myTPOT_DEPLOYMENT_TYPE" == "use
     "\nRequired: 8-16GB RAM, 128GB SSD\nRecommended: 16GB RAM, 256GB SSD" 17 70 1 \
   #  "STANDARD" "T-Pot Standalone with everything you need" \
     "HIVE" "T-Pot Hive: ELK & Tools" \
-    "HIVE_SENSOR" "T-Pot Hive Sensor: Honeypots & NSM" \
+    "HIVE_SENSOR" "T-Pot Hive Sensor: Honeypots & NSM"  3>&1 1>&2 2>&3 3>&-)
   #  "INDUSTRIAL" "Same as Standard with focus on Conpot" \
   #  "LOG4J" "Log4Pot, ELK, NSM & Tools" \
   #  "MEDICAL" "Dicompot, Medpot, ELK, NSM & Tools" \
   #  "MINI" "Same as Standard with focus on qHoneypots" \
-  #  "SENSOR" "Just Honeypots & NSM" \ 
-      3>&1 1>&2 2>&3 3>&-)
+  #  "SENSOR" "Just Honeypots & NSM" 3>&1 1>&2 2>&3 3>&-)
 fi
 
 # Let's ask for a secure tsec password if installation type is iso
