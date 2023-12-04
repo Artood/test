@@ -599,70 +599,70 @@ if [ "$myTPOT_DEPLOYMENT_TYPE" == "iso" ] || [ "$myTPOT_DEPLOYMENT_TYPE" == "use
     EMAIL_USER="None"
     EMAIL_PASSWORD="None"
     MY_CUSTOMER="None"
-
-    while [ 1 != 2 ]
-      do
-        if [ "$myCONF_TPOT_FLAVOR" == "HIVE_SENSOR" ];
-          then
-            myCUSTOMER=$(dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Enter customer ]" --inputbox "\nCustomer" 9 50 3>&1 1>&2 2>&3 3>&-)
-            myCUSTOMER=$(echo $myCUSTOMER | tr -cd "[:alnum:]_.-")
-            dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Your customer is ]" --yesno "\n$myCUSTOMER" 7 50
-            myOK=$?
-            if [ "$myOK" = "0" ] && [ "$myCUSTOMER" != "" ];
-              then
-                break
-            fi
-        fi
-        if [ "$myCONF_TPOT_FLAVOR" == "HIVE" ];
-          then
-            myCONF_WEB_USER=$(dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Enter your web user name ]" --inputbox "\nUsername (tsec not allowed)" 9 50 3>&1 1>&2 2>&3 3>&-)
-            myCONF_WEB_USER=$(echo $myCONF_WEB_USER | tr -cd "[:alnum:]_.-")
-            dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Your username is ]" --yesno "\n$myCONF_WEB_USER" 7 50
-            myOK=$?
-            if [ "$myOK" = "0" ] && [ "$myCONF_WEB_USER" != "tsec" ] && [ "$myCONF_WEB_USER" != "" ];
-              then
-                break
-            fi
-            while [ "$myCONF_WEB_PW" != "$myCONF_WEB_PW2"  ] && [ "$mySECURE" == "0" ]
+    if [ "$myCONF_TPOT_FLAVOR" == "HIVE_SENSOR" ]; then
+      while [ 1 != 2 ]
+        do
+          myCUSTOMER=$(dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Enter customer ]" --inputbox "\nCustomer" 9 50 3>&1 1>&2 2>&3 3>&-)
+          myCUSTOMER=$(echo $myCUSTOMER | tr -cd "[:alnum:]_.-")
+          dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Your customer is ]" --yesno "\n$myCUSTOMER" 7 50
+          myOK=$?
+          if [ "$myOK" = "0" ] && [ "$myCUSTOMER" != "" ];
+            then
+              break
+          fi
+        done
+    fi
+    if [ "$myCONF_TPOT_FLAVOR" == "HIVE" ]; then
+      while [ 1 != 2 ]
+        do
+          myCONF_WEB_USER=$(dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Enter your web user name ]" --inputbox "\nUsername (tsec not allowed)" 9 50 3>&1 1>&2 2>&3 3>&-)
+          myCONF_WEB_USER=$(echo $myCONF_WEB_USER | tr -cd "[:alnum:]_.-")
+          dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Your username is ]" --yesno "\n$myCONF_WEB_USER" 7 50
+          myOK=$?
+          if [ "$myOK" = "0" ] && [ "$myCONF_WEB_USER" != "tsec" ] && [ "$myCONF_WEB_USER" != "" ];
+            then
+              break
+          fi
+        done
+        while [ "$myCONF_WEB_PW" != "$myCONF_WEB_PW2"  ] && [ "$mySECURE" == "0" ]
+          do
+            while [ "$myCONF_WEB_PW" == "pass1"  ] || [ "$myCONF_WEB_PW" == "" ]
               do
-                while [ "$myCONF_WEB_PW" == "pass1"  ] || [ "$myCONF_WEB_PW" == "" ]
-                  do
-                    myCONF_WEB_PW=$(dialog --keep-window --insecure --backtitle "$myBACKTITLE" \
-                             --title "[ Enter password for your web user ]" \
-                             --passwordbox "\nPassword" 9 60 3>&1 1>&2 2>&3 3>&-)
-                  done
-                myCONF_WEB_PW2=$(dialog --keep-window --insecure --backtitle "$myBACKTITLE" \
-                         --title "[ Repeat password for your web user ]" \
-                         --passwordbox "\nPassword" 9 60 3>&1 1>&2 2>&3 3>&-)
-                if [ "$myCONF_WEB_PW" != "$myCONF_WEB_PW2" ];
-                  then
-                    dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Passwords do not match. ]" \
+                myCONF_WEB_PW=$(dialog --keep-window --insecure --backtitle "$myBACKTITLE" \
+                           --title "[ Enter password for your web user ]" \
+                           --passwordbox "\nPassword" 9 60 3>&1 1>&2 2>&3 3>&-)
+              done
+            myCONF_WEB_PW2=$(dialog --keep-window --insecure --backtitle "$myBACKTITLE" \
+                       --title "[ Repeat password for your web user ]" \
+                       --passwordbox "\nPassword" 9 60 3>&1 1>&2 2>&3 3>&-)
+            if [ "$myCONF_WEB_PW" != "$myCONF_WEB_PW2" ];
+              then
+                dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Passwords do not match. ]" \
                        --msgbox "\nPlease re-enter your password." 7 60
+                myCONF_WEB_PW="pass1"
+                myCONF_WEB_PW2="pass2"
+            fi
+            mySECURE=$(printf "%s" "$myCONF_WEB_PW" | cracklib-check | grep -c "OK")
+            if [ "$mySECURE" == "0" ] && [ "$myCONF_WEB_PW" == "$myCONF_WEB_PW2" ];
+              then
+                dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Password is not secure ]" --defaultno --yesno "\nKeep insecure password?" 7 50
+                myOK=$?
+                if [ "$myOK" == "1" ];
+                  then
                     myCONF_WEB_PW="pass1"
                     myCONF_WEB_PW2="pass2"
                 fi
-                mySECURE=$(printf "%s" "$myCONF_WEB_PW" | cracklib-check | grep -c "OK")
-                if [ "$mySECURE" == "0" ] && [ "$myCONF_WEB_PW" == "$myCONF_WEB_PW2" ];
-                  then
-                    dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Password is not secure ]" --defaultno --yesno "\nKeep insecure password?" 7 50
-                    myOK=$?
-                    if [ "$myOK" == "1" ];
-                      then
-                        myCONF_WEB_PW="pass1"
-                        myCONF_WEB_PW2="pass2"
-                    fi
-                fi
-              done
-            
-            TELEGRAM_BOT_ID=$(dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Enter Telegram Bot ID ]" --inputbox "\nTelegram Bot ID" 9 50 3>&1 1>&2 2>&3 3>&-)
-            TELEGRAM_API_KEY=$(dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Enter Telegram API Key ]" --inputbox "\nTelegram API Key" 9 50 3>&1 1>&2 2>&3 3>&-)
-            TELEGRAM_CHAT_ID=$(dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Enter Telegram Chat ID ]" --inputbox "\nTelegram Chat ID" 9 50 3>&1 1>&2 2>&3 3>&-)
-            EMAIL_SERVER=$(dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Enter SMTP address ]" --inputbox "\nSMTP address" 9 50 3>&1 1>&2 2>&3 3>&-)
-            EMAIL_USER=$(dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Enter Username ]" --inputbox "\nUsernsme" 9 50 3>&1 1>&2 2>&3 3>&-)
-            EMAIL_PASSWORD=$(dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Enter Password ]" --inputbox "\nPassword" 9 50 3>&1 1>&2 2>&3 3>&-)
-            EMAIL_TO=$(dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Enter Email ]" --inputbox "\nEmail" 9 50 3>&1 1>&2 2>&3 3>&-)        
-        fi
-      done
+            fi
+            done       
+        done
+      TELEGRAM_BOT_ID=$(dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Enter Telegram Bot ID ]" --inputbox "\nTelegram Bot ID" 9 50 3>&1 1>&2 2>&3 3>&-)
+      TELEGRAM_API_KEY=$(dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Enter Telegram API Key ]" --inputbox "\nTelegram API Key" 9 50 3>&1 1>&2 2>&3 3>&-)
+      TELEGRAM_CHAT_ID=$(dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Enter Telegram Chat ID ]" --inputbox "\nTelegram Chat ID" 9 50 3>&1 1>&2 2>&3 3>&-)
+      EMAIL_SERVER=$(dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Enter SMTP address ]" --inputbox "\nSMTP address" 9 50 3>&1 1>&2 2>&3 3>&-)
+      EMAIL_USER=$(dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Enter Username ]" --inputbox "\nUsernsme" 9 50 3>&1 1>&2 2>&3 3>&-)
+      EMAIL_PASSWORD=$(dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Enter Password ]" --inputbox "\nPassword" 9 50 3>&1 1>&2 2>&3 3>&-)
+      EMAIL_TO=$(dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Enter Email ]" --inputbox "\nEmail" 9 50 3>&1 1>&2 2>&3 3>&-)
+    fi
 fi
 
 dialog --clear
