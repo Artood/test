@@ -591,9 +591,18 @@ if [ "$myTPOT_DEPLOYMENT_TYPE" == "iso" ] || [ "$myTPOT_DEPLOYMENT_TYPE" == "use
     myCONF_WEB_PW2="pass2"
     myCUSTOMER="customer"
     mySECURE="0"
+    TELEGRAM_BOT_ID="None"
+    TELEGRAM_API_KEY="None"
+    TELEGRAM_CHAT_ID="None"
+    EMAIL_TO="None"
+    EMAIL_SERVER="None"
+    EMAIL_USER="None"
+    EMAIL_PASSWORD="None"
+    MY_CUSTOMER="None"
+
     while [ 1 != 2 ]
       do
-        if ["$myCONF_TPOT_FLAVOR" == "HIVE_SENSOR"];
+        if [ "$myCONF_TPOT_FLAVOR" == "HIVE_SENSOR" ];
           then
             myCUSTOMER=$(dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Enter customer ]" --inputbox "\nCustomer" 9 50 3>&1 1>&2 2>&3 3>&-)
             myCUSTOMER=$(echo $myCUSTOMER | tr -cd "[:alnum:]_.-")
@@ -604,7 +613,7 @@ if [ "$myTPOT_DEPLOYMENT_TYPE" == "iso" ] || [ "$myTPOT_DEPLOYMENT_TYPE" == "use
                 break
             fi
         fi
-        if ["$myCONF_TPOT_FLAVOR" == "HIVE"];
+        if [ "$myCONF_TPOT_FLAVOR" == "HIVE" ];
           then
             myCONF_WEB_USER=$(dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Enter your web user name ]" --inputbox "\nUsername (tsec not allowed)" 9 50 3>&1 1>&2 2>&3 3>&-)
             myCONF_WEB_USER=$(echo $myCONF_WEB_USER | tr -cd "[:alnum:]_.-")
@@ -644,6 +653,7 @@ if [ "$myTPOT_DEPLOYMENT_TYPE" == "iso" ] || [ "$myTPOT_DEPLOYMENT_TYPE" == "use
                     fi
                 fi
               done
+            
             TELEGRAM_BOT_ID=$(dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Enter Telegram Bot ID ]" --inputbox "\nTelegram Bot ID" 9 50 3>&1 1>&2 2>&3 3>&-)
             TELEGRAM_API_KEY=$(dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Enter Telegram API Key ]" --inputbox "\nTelegram API Key" 9 50 3>&1 1>&2 2>&3 3>&-)
             TELEGRAM_CHAT_ID=$(dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Enter Telegram Chat ID ]" --inputbox "\nTelegram Chat ID" 9 50 3>&1 1>&2 2>&3 3>&-)
