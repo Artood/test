@@ -657,9 +657,20 @@ if [ "$myTPOT_DEPLOYMENT_TYPE" == "iso" ] || [ "$myTPOT_DEPLOYMENT_TYPE" == "use
       TELEGRAM_API_KEY=$(dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Enter Telegram API Key ]" --inputbox "\nTelegram API Key" 9 50 3>&1 1>&2 2>&3 3>&-)
       TELEGRAM_CHAT_ID=$(dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Enter Telegram Chat ID ]" --inputbox "\nTelegram Chat ID" 9 50 3>&1 1>&2 2>&3 3>&-)
       EMAIL_SERVER=$(dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Enter SMTP address ]" --inputbox "\nSMTP address" 9 50 3>&1 1>&2 2>&3 3>&-)
-      EMAIL_USER=$(dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Enter Username ]" --inputbox "\nUsernsme" 9 50 3>&1 1>&2 2>&3 3>&-)
+      EMAIL_USER=$(dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Enter Username ]" --inputbox "\nUsername" 9 50 3>&1 1>&2 2>&3 3>&-)
       EMAIL_PASSWORD=$(dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Enter Password ]" --inputbox "\nPassword" 9 50 3>&1 1>&2 2>&3 3>&-)
-      EMAIL_TO=$(dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Enter Email ]" --inputbox "\nEmail" 9 50 3>&1 1>&2 2>&3 3>&-)
+      EMAIL_TO=$(dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Enter Email ]" --inputbox "\nEmail From" 9 50 3>&1 1>&2 2>&3 3>&-)
+
+      
+      echo "TELEGRAM_BOT_ID=${TELEGRAM_BOT_ID}" >> /opt/tpot/etc/compose/elk_environment
+      echo "TELEGRAM_API_KEY=${TELEGRAM_API_KEY}" >>/opt/tpot/etc/compose/elk_environment
+      echo "TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}" >> /opt/tpot/etc/compose/elk_environment
+      echo "EMAIL_TO=${EMAIL_TO}" >> /opt/tpot/etc/compose/elk_environment
+      echo "EMAIL_SERVER=${EMAIL_SERVER}" >> /opt/tpot/etc/compose/elk_environment
+      echo "EMAIL_USER=${EMAIL_USER}" >> /opt/tpot/etc/compose/elk_environment
+      echo "EMAIL_PASSWORD=${EMAIL_PASSWORD}" >> /opt/tpot/etc/compose/elk_environment
+      echo "MY_CUSTOMER=${MY_CUSTOMER}" >>/opt/tpot/etc/compose/elk_environment
+EOF
     fi
 fi
 

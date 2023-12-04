@@ -43,14 +43,6 @@ export myEXTIP_LAT
 export myEXTIP_LONG
 export myBLACKHOLE_STATUS
 export mySSHUSER
-export TELEGRAM_BOT_ID
-export TELEGRAM_API_KEY
-export TELEGRAM_CHAT_ID
-export EMAIL_TO
-export EMAIL_SERVER
-export EMAIL_USER
-export EMAIL_PASSWORD
-export MY_CUSTOMER
 
 # Build issue
 # echo "[H[2J" > /etc/issue
@@ -73,22 +65,21 @@ tee /data/ews/conf/ews.ip << EOF
 [MAIN]
 ip = $myEXTIP
 EOF
-tee /opt/tpot/etc/compose/elk_environment << EOF
-HONEY_UUID=$myUUID
-MY_EXTIP=$myEXTIP
-MY_EXTIP_LAT=$myEXTIP_LAT
-MY_EXTIP_LONG=$myEXTIP_LONG
-MY_INTIP=$myLOCALIP
-MY_HOSTNAME=$HOSTNAME
-TELEGRAM_BOT_ID=$TELEGRAM_BOT_ID
-TELEGRAM_API_KEY=$TELEGRAM_API_KEY
-TELEGRAM_CHAT_ID=$TELEGRAM_CHAT_ID
-EMAIL_TO=$EMAIL_TO
-EMAIL_SERVER=$EMAIL_SERVER
-EMAIL_USER=$EMAIL_USER
-EMAIL_PASSWORD=$EMAIL_PASSWORD
-MY_CUSTOMER=$MY_CUSTOMER
-EOF
+#tee /opt/tpot/etc/compose/elk_environment << EOF
+#HONEY_UUID=$myUUID
+#MY_EXTIP=$myEXTIP
+#MY_EXTIP_LAT=$myEXTIP_LAT
+#MY_EXTIP_LONG=$myEXTIP_LONG
+#MY_INTIP=$myLOCALIP
+#MY_HOSTNAME=$HOSTNAME
+#EOF
+echo "HONEY_UUID=$myUUID" >> /opt/tpot/etc/compose/elk_environment
+echo "MY_EXTIP=$myEXTIP" >> /opt/tpot/etc/compose/elk_environment
+echo "MY_EXTIP_LAT=$myEXTIP_LAT" >> /opt/tpot/etc/compose/elk_environment
+echo "MY_EXTIP_LONG=$myEXTIP_LONG" >> /opt/tpot/etc/compose/elk_environment
+echo "MY_INTIP=$myLOCALIP" >> /opt/tpot/etc/compose/elk_environment
+echo "MY_HOSTNAME=$HOSTNAME" >> /opt/tpot/etc/compose/elk_environment
+
 
 if [ -s "/data/elk/logstash/ls_environment" ];
   then
