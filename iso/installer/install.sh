@@ -624,37 +624,33 @@ if [ "$myTPOT_DEPLOYMENT_TYPE" == "iso" ] || [ "$myTPOT_DEPLOYMENT_TYPE" == "use
               break
           fi
         done
-        while [ "$myCONF_WEB_PW" != "$myCONF_WEB_PW2"  ] && [ "$mySECURE" == "0" ]
-          do
-            while [ "$myCONF_WEB_PW" == "pass1"  ] || [ "$myCONF_WEB_PW" == "" ]
-              do
-                myCONF_WEB_PW=$(dialog --keep-window --insecure --backtitle "$myBACKTITLE" \
-                           --title "[ Enter password for your web user ]" \
-                           --passwordbox "\nPassword" 9 60 3>&1 1>&2 2>&3 3>&-)
-              done
-            myCONF_WEB_PW2=$(dialog --keep-window --insecure --backtitle "$myBACKTITLE" \
-                       --title "[ Repeat password for your web user ]" \
-                       --passwordbox "\nPassword" 9 60 3>&1 1>&2 2>&3 3>&-)
-            if [ "$myCONF_WEB_PW" != "$myCONF_WEB_PW2" ];
-              then
-                dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Passwords do not match. ]" \
-                       --msgbox "\nPlease re-enter your password." 7 60
-                myCONF_WEB_PW="pass1"
-                myCONF_WEB_PW2="pass2"
+      while [ "$myCONF_WEB_PW" != "$myCONF_WEB_PW2"  ] && [ "$mySECURE" == "0" ]
+        do
+          while [ "$myCONF_WEB_PW" == "pass1"  ] || [ "$myCONF_WEB_PW" == "" ]
+            do
+              myCONF_WEB_PW=$(dialog --keep-window --insecure --backtitle "$myBACKTITLE" \
+                         --title "[ Enter password for your web user ]" \
+                         --passwordbox "\nPassword" 9 60 3>&1 1>&2 2>&3 3>&-)
+            done
+          myCONF_WEB_PW2=$(dialog --keep-window --insecure --backtitle "$myBACKTITLE" \
+                     --title "[ Repeat password for your web user ]" \
+                     --passwordbox "\nPassword" 9 60 3>&1 1>&2 2>&3 3>&-)
+          if [ "$myCONF_WEB_PW" != "$myCONF_WEB_PW2" ]; then
+            dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Passwords do not match. ]" \
+                   --msgbox "\nPlease re-enter your password." 7 60
+            myCONF_WEB_PW="pass1"
+            myCONF_WEB_PW2="pass2"
+          fi
+          mySECURE=$(printf "%s" "$myCONF_WEB_PW" | cracklib-check | grep -c "OK")
+          if [ "$mySECURE" == "0" ] && [ "$myCONF_WEB_PW" == "$myCONF_WEB_PW2" ]; then
+            dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Password is not secure ]" --defaultno --yesno "\nKeep insecure password?" 7 50
+            myOK=$?
+            if [ "$myOK" == "1" ]; then
+              myCONF_WEB_PW="pass1"
+              myCONF_WEB_PW2="pass2"
             fi
-            mySECURE=$(printf "%s" "$myCONF_WEB_PW" | cracklib-check | grep -c "OK")
-            if [ "$mySECURE" == "0" ] && [ "$myCONF_WEB_PW" == "$myCONF_WEB_PW2" ];
-              then
-                dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Password is not secure ]" --defaultno --yesno "\nKeep insecure password?" 7 50
-                myOK=$?
-                if [ "$myOK" == "1" ];
-                  then
-                    myCONF_WEB_PW="pass1"
-                    myCONF_WEB_PW2="pass2"
-                fi
-            fi
-            done       
-        done
+          fi
+        done       
       TELEGRAM_BOT_ID=$(dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Enter Telegram Bot ID ]" --inputbox "\nTelegram Bot ID" 9 50 3>&1 1>&2 2>&3 3>&-)
       TELEGRAM_API_KEY=$(dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Enter Telegram API Key ]" --inputbox "\nTelegram API Key" 9 50 3>&1 1>&2 2>&3 3>&-)
       TELEGRAM_CHAT_ID=$(dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Enter Telegram Chat ID ]" --inputbox "\nTelegram Chat ID" 9 50 3>&1 1>&2 2>&3 3>&-)
