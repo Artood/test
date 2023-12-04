@@ -7,7 +7,6 @@ bat
 build-essential
 ca-certificates
 cgroupfs-mount
-cockpit conntrack
 console-setup
 console-setup-linux
 cracklib-runtime

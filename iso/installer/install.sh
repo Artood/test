@@ -161,10 +161,10 @@ mySYSTEMDFIX="[Link]
 NamePolicy=kernel database onboard slot path
 MACAddressPolicy=none
 "
-myCOCKPIT_SOCKET="[Socket]
-ListenStream=
-ListenStream=64294
-"
+#myCOCKPIT_SOCKET="[Socket]
+#ListenStream=
+#ListenStream=64294
+#"
 mySSHSETTINGS="
 Port 64295
 Match Group tpotlogs
@@ -314,9 +314,11 @@ function fuGET_DEPS {
   apt-fast -y install $myINSTALLPACKAGES
   # Remove exim4
   echo "### Removing and holding back problematic packages ..."
-  apt-fast -y purge exim4-base mailutils pcp cockpit-pcp elasticsearch-curator
+  #apt-fast -y purge exim4-base mailutils pcp cockpit-pcp elasticsearch-curator
+  apt-fast -y purge exim4-base mailutils elasticsearch-curator
   apt-fast -y autoremove
-  apt-mark hold exim4-base mailutils pcp cockpit-pcp
+  #apt-mark hold exim4-base mailutils pcp cockpit-pcp
+  apt-mark hold exim4-base mailutils
 }
 
 # Check for other services
@@ -764,13 +766,13 @@ fi
 
 # Let's patch cockpit.socket, sshd_config
 fuBANNER "Adjust ports"
-mkdir -p /etc/systemd/system/cockpit.socket.d
-echo "$myCOCKPIT_SOCKET" | tee /etc/systemd/system/cockpit.socket.d/listen.conf
+#mkdir -p /etc/systemd/system/cockpit.socket.d
+#echo "$myCOCKPIT_SOCKET" | tee /etc/systemd/system/cockpit.socket.d/listen.conf
 sed -i '/^port/Id' /etc/ssh/sshd_config
 echo "$mySSHSETTINGS" | tee -a /etc/ssh/sshd_config
 
 # Do not allow root login for cockpit
-sed -i '2i\auth requisite pam_succeed_if.so uid >= 1000' /etc/pam.d/cockpit
+#sed -i '2i\auth requisite pam_succeed_if.so uid >= 1000' /etc/pam.d/cockpit
 
 # Let's make sure only myCONF_TPOT_FLAVOR images will be downloaded and started
 case $myCONF_TPOT_FLAVOR in
@@ -936,8 +938,8 @@ apt-fast autoremove -y
 # Final steps
 cp /opt/tpot/host/etc/rc.local /etc/rc.local && \
 rm -rf /root/installer && \
-rm -rf /etc/issue.d/cockpit.issue && \
-rm -rf /etc/motd.d/cockpit && \
+#rm -rf /etc/issue.d/cockpit.issue && \
+#rm -rf /etc/motd.d/cockpit && \
 rm -rf /etc/issue.net && \
 rm -rf /etc/motd && \
 systemctl restart console-setup.service

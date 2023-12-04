@@ -43,6 +43,14 @@ export myEXTIP_LAT
 export myEXTIP_LONG
 export myBLACKHOLE_STATUS
 export mySSHUSER
+export TELEGRAM_BOT_ID
+export TELEGRAM_API_KEY
+export TELEGRAM_CHAT_ID
+export EMAIL_TO
+export EMAIL_SERVER
+export EMAIL_USER
+export EMAIL_PASSWORD
+export MY_CUSTOMER
 
 # Build issue
 # echo "[H[2J" > /etc/issue
