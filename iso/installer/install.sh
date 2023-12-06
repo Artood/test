@@ -670,7 +670,6 @@ if [ "$myTPOT_DEPLOYMENT_TYPE" == "iso" ] || [ "$myTPOT_DEPLOYMENT_TYPE" == "use
       echo "EMAIL_USER=${EMAIL_USER}" >> /opt/tpot/etc/compose/elk_environment
       echo "EMAIL_PASSWORD=${EMAIL_PASSWORD}" >> /opt/tpot/etc/compose/elk_environment
       echo "MY_CUSTOMER=${MY_CUSTOMER}" >>/opt/tpot/etc/compose/elk_environment
-EOF
     fi
 fi
 
