@@ -65,20 +65,14 @@ tee /data/ews/conf/ews.ip << EOF
 [MAIN]
 ip = $myEXTIP
 EOF
-#tee /opt/tpot/etc/compose/elk_environment << EOF
-#HONEY_UUID=$myUUID
-#MY_EXTIP=$myEXTIP
-#MY_EXTIP_LAT=$myEXTIP_LAT
-#MY_EXTIP_LONG=$myEXTIP_LONG
-#MY_INTIP=$myLOCALIP
-#MY_HOSTNAME=$HOSTNAME
-#EOF
-echo "HONEY_UUID=$myUUID" >> /opt/tpot/etc/compose/elk_environment
-echo "MY_EXTIP=$myEXTIP" >> /opt/tpot/etc/compose/elk_environment
-echo "MY_EXTIP_LAT=$myEXTIP_LAT" >> /opt/tpot/etc/compose/elk_environment
-echo "MY_EXTIP_LONG=$myEXTIP_LONG" >> /opt/tpot/etc/compose/elk_environment
-echo "MY_INTIP=$myLOCALIP" >> /opt/tpot/etc/compose/elk_environment
-echo "MY_HOSTNAME=$HOSTNAME" >> /opt/tpot/etc/compose/elk_environment
+tee /opt/tpot/etc/compose/elk_environment << EOF
+HONEY_UUID=$myUUID
+MY_EXTIP=$myEXTIP
+MY_EXTIP_LAT=$myEXTIP_LAT
+MY_EXTIP_LONG=$myEXTIP_LONG
+MY_INTIP=$myLOCALIP
+MY_HOSTNAME=$HOSTNAME
+EOF
 
 
 if [ -s "/data/elk/logstash/ls_environment" ];

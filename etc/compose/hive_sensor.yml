@@ -520,6 +520,7 @@ services:
      - LS_JAVA_OPTS=-Xms1024m -Xmx1024m
     env_file:
      - /opt/tpot/etc/compose/elk_environment
+     - /opt/tpot/etc/compose/elk_env_install
     mem_limit: 2g
     build: /opt/tpot/docker/elk/map/
 #    image: "dtagdevsec/logstash:2204"
