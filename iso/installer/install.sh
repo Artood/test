@@ -661,16 +661,6 @@ if [ "$myTPOT_DEPLOYMENT_TYPE" == "iso" ] || [ "$myTPOT_DEPLOYMENT_TYPE" == "use
       EMAIL_PASSWORD=$(dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Enter Password ]" --inputbox "\nPassword" 9 50 3>&1 1>&2 2>&3 3>&-)
       EMAIL_TO=$(dialog --keep-window --backtitle "$myBACKTITLE" --title "[ Enter Email ]" --inputbox "\nEmail From" 9 50 3>&1 1>&2 2>&3 3>&-)
 
-      tee /opt/tpot/etc/compose/elk_env_install << EOF
-TELEGRAM_BOT_ID=$TELEGRAM_BOT_ID
-TELEGRAM_API_KEY=$TELEGRAM_API_KEY
-TELEGRAM_CHAT_ID=$TELEGRAM_CHAT_ID
-EMAIL_TO=$EMAIL_TO
-EMAIL_SERVER=$EMAIL_SERVER
-EMAIL_USER=$EMAIL_USER
-EMAIL_PASSWORD=$EMAIL_PASSWORD
-MY_CUSTOMER=$MY_CUSTOMER
-EOF
     fi
 fi
 
@@ -732,8 +722,8 @@ if [ "myCONF_PFX_USE" == "0" ];
 fi
 
 # Let's provide a wireless example config ...
-fuBANNER "Example config"
-echo "$myNETWORK_WLANEXAMPLE" | tee -a /etc/network/interfaces
+#fuBANNER "Example config"
+#echo "$myNETWORK_WLANEXAMPLE" | tee -a /etc/network/interfaces
 
 # Let's make sure SSH roaming is turned off (CVE-2016-0777, CVE-2016-0778)
 fuBANNER "SSH roaming off"
@@ -760,6 +750,18 @@ addgroup --gid 2000 tpot
 addgroup tpotlogs
 fuBANNER "Create user"
 adduser --system --no-create-home --uid 2000 --disabled-password --disabled-login --gid 2000 tpot
+
+# Add envirements for logstash
+tee /opt/tpot/etc/compose/elk_env_install << EOF
+TELEGRAM_BOT_ID=$TELEGRAM_BOT_ID
+TELEGRAM_API_KEY=$TELEGRAM_API_KEY
+TELEGRAM_CHAT_ID=$TELEGRAM_CHAT_ID
+EMAIL_TO=$EMAIL_TO
+EMAIL_SERVER=$EMAIL_SERVER
+EMAIL_USER=$EMAIL_USER
+EMAIL_PASSWORD=$EMAIL_PASSWORD
+MY_CUSTOMER=$MY_CUSTOMER
+EOF
 
 # Let's set the hostname
 #a=$(fuRANDOMWORD /opt/tpot/host/usr/share/dict/a.txt)
