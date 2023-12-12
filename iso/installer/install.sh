@@ -722,8 +722,8 @@ if [ "myCONF_PFX_USE" == "0" ];
 fi
 
 # Let's provide a wireless example config ...
-#fuBANNER "Example config"
-#echo "$myNETWORK_WLANEXAMPLE" | tee -a /etc/network/interfaces
+fuBANNER "Example config"
+echo "$myNETWORK_WLANEXAMPLE" | tee -a /etc/network/interfaces
 
 # Let's make sure SSH roaming is turned off (CVE-2016-0777, CVE-2016-0778)
 fuBANNER "SSH roaming off"

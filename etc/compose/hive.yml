@@ -64,7 +64,7 @@ services:
      - "127.0.0.1:64305:64305"
 #    mem_limit: 2g
 #    image: "dtagdevsec/logstash:2204"
-    build: /opt/tpot/docker/logstash/map/
+    build: /opt/tpot/docker/elk/logstash/
     volumes:
      - /data:/data
 

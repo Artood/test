@@ -522,7 +522,7 @@ services:
      - /opt/tpot/etc/compose/elk_environment
      - /opt/tpot/etc/compose/elk_env_install
     mem_limit: 2g
-    build: /opt/tpot/docker/elk/map/
+    build: /opt/tpot/docker/elk/logstash/
 #    image: "dtagdevsec/logstash:2204"
     volumes:
      - /data:/data
