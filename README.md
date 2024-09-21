@@ -55,7 +55,7 @@ T-Pot is the all in one, optionally distributed, multiarch (amd64, arm64) honeyp
 - [Maintenance](#maintenance)
   - [Updates](#updates)
     - [Update from 20.06.x](#update-from-2006x)
-    - [Updates for 22.04.x](#updates-for-2204x)
+    - [Updates for 22.04.x](#updates-for-24.04x)
   - [Known Issues](#known-issues)
     - [Grub Fails to Reconfigure](#grub-fails-to-reconfigure)
     - [Docker Images Fail to Download](#docker-images-fail-to-download)

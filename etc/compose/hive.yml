@@ -32,7 +32,7 @@ services:
 #    mem_limit: 4g
     ports:
      - "127.0.0.1:64298:9200"
-    image: "dtagdevsec/elasticsearch:2204"
+    image: "dtagdevsec/elasticsearch:24.04"
     volumes:
      - /data:/data
 
@@ -46,7 +46,7 @@ services:
 #    mem_limit: 1g
     ports:
      - "127.0.0.1:64296:5601"
-    image: "dtagdevsec/kibana:2204"
+    image: "dtagdevsec/kibana:24.04"
 
 ## Logstash service
   logstash:
@@ -63,7 +63,7 @@ services:
     ports:
      - "127.0.0.1:64305:64305"
 #    mem_limit: 2g
-#    image: "dtagdevsec/logstash:2204"
+#    image: "dtagdevsec/logstash:24.04"
     build: /opt/tpot/docker/elk/logstash/
     volumes:
      - /data:/data
@@ -74,7 +74,7 @@ services:
     restart: always
     stop_signal: SIGKILL
     tty: true
-    image: "dtagdevsec/redis:2204"
+    image: "dtagdevsec/redis:24.04"
     read_only: true
 
 ## Map Web Service
@@ -125,7 +125,7 @@ services:
       #    ports:
       #     - "64297:64297"
       #     - "127.0.0.1:64304:64304"
-    image: "dtagdevsec/nginx:2204"
+    image: "dtagdevsec/nginx:24.04"
     read_only: true
     volumes:
      - /data/nginx/cert/:/etc/nginx/cert/:ro
@@ -141,6 +141,6 @@ services:
      - spiderfoot_local
     ports:
      - "127.0.0.1:64303:8080"
-    image: "dtagdevsec/spiderfoot:2204"
+    image: "dtagdevsec/spiderfoot:24.04"
     volumes:
      - /data/spiderfoot:/home/spiderfoot/.spiderfoot
