@@ -96,10 +96,10 @@ network={
 "
 myNETWORK_WLANEXAMPLE="
 ### Example static ip config
-### Replace <eth0> with the name of your physical interface name
+### Replace <ens33> with the name of your physical interface name
 #
-#auto eth0
-#iface eth0 inet static
+#auto ens33
+#iface ens33 inet static
 # address 192.168.1.1
 # netmask 255.255.255.0
 # network 192.168.1.0
