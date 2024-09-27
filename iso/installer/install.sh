@@ -94,34 +94,7 @@ network={
   private_key_passwd=\"$myCONF_PFX_PW\"
 }
 "
-myNETWORK_WLANEXAMPLE="
-### Example static ip config
-### Replace <ens33> with the name of your physical interface name
-#
-#auto ens33
-#iface ens33 inet static
-# address 192.168.1.1
-# netmask 255.255.255.0
-# network 192.168.1.0
-# broadcast 192.168.1.255
-# gateway 192.168.1.1
-# dns-nameservers 192.168.1.1
 
-### Example wireless config without 802.1x
-### This configuration was tested with the IntelNUC series
-### If problems occur you can try and change wpa-driver to \"iwlwifi\"
-#
-#auto wlan0
-#iface wlan0 inet dhcp
-#   wpa-driver wext
-#   wpa-ssid <your_ssid_here_without_brackets>
-#   wpa-ap-scan 1
-#   wpa-proto RSN
-#   wpa-pairwise CCMP
-#   wpa-group CCMP
-#   wpa-key-mgmt WPA-PSK
-#   wpa-psk \"<your_password_here_without_brackets>\"
-"
 myUPDATECHECK="APT::Periodic::Update-Package-Lists \"1\";
 APT::Periodic::Download-Upgradeable-Packages \"0\";
 APT::Periodic::AutocleanInterval \"7\";
