@@ -321,6 +321,28 @@ function fuGET_DEPS {
   apt-mark hold exim4-base mailutils
 }
 
+# Check if Docker is installed
+if ! command -v docker &> /dev/null; then
+    echo "Docker is not installed. Installing now..."
+
+    # Install Docker
+    sudo apt-get -y update
+    sudo apt-get -y install apt-transport-https ca-certificates curl gnupg lsb-release
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+    echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    sudo apt-get -y update
+    sudo apt-get -y install docker-ce docker-ce-cli containerd.io
+    sudo systemctl enable docker
+    sudo systemctl start docker
+
+    # Add user to Docker group
+    sudo usermod -aG docker $(whoami)
+
+    echo "Docker installation complete"
+else
+    echo "Docker is already installed"
+fi
+
 # Check for other services
 function fuCHECK_PORTS {
 if [ "$myTPOT_DEPLOYMENT_TYPE" == "user" ];
