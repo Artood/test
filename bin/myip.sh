@@ -21,6 +21,7 @@ httplist=(
   bot.whatismyipaddress.com
   canhazip.com
   checkip.amazonaws.com
+  eth0.me
   icanhazip.com
   ident.me
   ipecho.net/plain
