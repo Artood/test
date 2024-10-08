@@ -12,7 +12,7 @@ fi
 INTERFACE="eth0"
 
 # Path to the netplan configuration file
-NETPLAN_FILE="/etc/netplan/00-installer-config.yaml"
+NETPLAN_FILE=$(ls /etc/netplan/*.yaml 2>/dev/null)
 
 # Create a backup of the current netplan configuration
 cp $NETPLAN_FILE "${NETPLAN_FILE}.bak"
