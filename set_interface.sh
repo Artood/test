@@ -21,7 +21,7 @@ if [ -z "$myNETPLAN_FILE" ]; then
 fi
 
 # Find the current network interface
-myINTERFACE=$(awk '/ethernets:/ {getline; print $1}' "$myNETPLAN_FILE")
+myINTERFACE=$(awk '/ethernets:/ {getline; sub(/:$/, ""); print $1}' "$myNETPLAN_FILE")
 
 # Check if we found the interface
 if [ -z "$myINTERFACE" ]; then
@@ -33,7 +33,7 @@ fi
 cp $myNETPLAN_FILE "${myNETPLAN_FILE}.bak"
 
 # Replace the interface
-sed -i "s/$myINTERFACE/$myNEW_INTERFACE:/" "$myNETPLAN_FILE"
+sed -i "s/$myINTERFACE/$myNEW_INTERFACE/" "$myNETPLAN_FILE"
 
 # Apply the new netplan configuration
 netplan apply
