@@ -9,23 +9,32 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 # Configuration parameters
-INTERFACE="eth0"
+myNEW_INTERFACE="eth0"
 
 # Path to the netplan configuration file
-NETPLAN_FILE=$(ls /etc/netplan/*.yaml 2>/dev/null)
+myNETPLAN_FILE=$(ls /etc/netplan/*.yaml 2>/dev/null)
+
+# Check if we found the netplan configuration file
+if [ -z "$myNETPLAN_FILE" ]; then
+    echo "The netplan configuration file not found!"
+    exit 1
+fi
+
+# Find the current network interface
+myINTERFACE=$(awk '/ethernets:/ {getline; print $1}' "$myNETPLAN_FILE")
+
+# Check if we found the interface
+if [ -z "$myINTERFACE" ]; then
+    echo "Network interface not found in the configuration file!"
+    exit 1
+fi
 
 # Create a backup of the current netplan configuration
-cp $NETPLAN_FILE "${NETPLAN_FILE}.bak"
+cp $myNETPLAN_FILE "${myNETPLAN_FILE}.bak"
 
-# Write the new netplan configuration
-cat <<EOL > $NETPLAN_FILE
-network:
-  ethernets:
-    $INTERFACE:
-     dhcp4: true
-  version: 2
-EOL
+# Replace the interface
+sed -i "s/$myINTERFACE/$myNEW_INTERFACE:/" "$myNETPLAN_FILE"
 
 # Apply the new netplan configuration
 netplan apply
-echo "The network interface has been configured to $INTERFACE."
+echo "The network interface $myINTERFACE has been configured to $myNEW_INTERFACE."
