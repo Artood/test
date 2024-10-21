@@ -940,6 +940,8 @@ PATH="\$PATH:/opt/tpot/bin"
 EOF
 done
 
+./si.sh
+
 # Let's create ews.ip before reboot and prevent race condition for first start
 fuBANNER "Update IP"
 /opt/tpot/bin/updateip.sh
