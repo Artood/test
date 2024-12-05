@@ -885,6 +885,7 @@ mkdir -vp /data/adbhoney/{downloads,log} \
           /data/sentrypeer/log \
           /data/spiderfoot \
           /data/suricata/log \
+          /data/top_10/log \
           /data/tanner/{log,files} \
           /home/tsec/.ssh/
 touch /data/nginx/log/error.log
@@ -940,8 +941,6 @@ PATH="\$PATH:/opt/tpot/bin"
 EOF
 done
 
-./si.sh
-
 # Let's create ews.ip before reboot and prevent race condition for first start
 fuBANNER "Update IP"
 /opt/tpot/bin/updateip.sh
@@ -959,6 +958,8 @@ rm -rf /root/installer && \
 rm -rf /etc/issue.net && \
 rm -rf /etc/motd && \
 systemctl restart console-setup.service
+
+./si.sh
 
 if [ "$myTPOT_DEPLOYMENT_TYPE" == "auto" ];
   then

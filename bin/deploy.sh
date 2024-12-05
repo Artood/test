@@ -21,7 +21,7 @@ echo "###############################"
 echo "# Deploying to T-Pot Hive ... #"
 echo "###############################"
 echo
-sshpass -e ssh -4 -t -T -l "$MY_TPOT_USERNAME" -p 64295 "$MY_HIVE_IP" << EOF
+sshpass -e ssh -4 -t -T -l "$MY_TPOT_USERNAME" -p 64295  "$MY_HIVE_IP" << EOF
 echo "$SSHPASS" | sudo -S bash -c 'useradd -m -s /sbin/nologin -G tpotlogs "$MY_HIVE_USERNAME";
 mkdir -p /home/"$MY_HIVE_USERNAME"/.ssh;
 echo "$MY_SENSOR_PUBLICKEY" >> /home/"$MY_HIVE_USERNAME"/.ssh/authorized_keys;

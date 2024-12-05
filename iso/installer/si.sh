@@ -35,6 +35,4 @@ cp $myNETPLAN_FILE "${myNETPLAN_FILE}.bak"
 # Replace the interface
 sed -i "s/$myINTERFACE/$myNEW_INTERFACE/" "$myNETPLAN_FILE"
 
-# Apply the new netplan configuration
-netplan apply
 echo "The network interface $myINTERFACE has been configured to $myNEW_INTERFACE."
