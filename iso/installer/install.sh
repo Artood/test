@@ -961,6 +961,8 @@ systemctl restart console-setup.service
 
 ./si.sh
 
+(crontab -l 2>/dev/null; echo "00 07 * * * /usr/bin/python3 /opt/tpot/bin/top_10_ip.py") | crontab -
+
 if [ "$myTPOT_DEPLOYMENT_TYPE" == "auto" ];
   then
     echo "Done. Please reboot."
